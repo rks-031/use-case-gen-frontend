@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import InfoBox from '../component/InfoBox';
 
 const orderby = ["search", "on_search", "select", "on_select", "init", "on_init", "confirm", "on_confirm", "status", "on_status", "track", "on_track", "update", "on_update", "cancel", "on_cancel", "rating", "on_rating", "support", "on_support"]
 
@@ -172,11 +173,16 @@ export default function Graph() {
         <div>
             <div className="button-container">
                 <Button variant="outlined" onClick={() => history.push('/')}>home</Button>
-                <Button variant="outlined" style={{marginLeft:'10px'}} onClick={downloadPdf}>export</Button>
+                <Button variant="outlined" style={{ marginLeft: '10px' }} onClick={downloadPdf}>export</Button>
+                <div className="step-graph">Step 22 of 22</div>
             </div>
-            <div className="button-container">
-                
+
+            <div className="g-main">
+                <div className='graph-info'>
+                    <InfoBox keyName='graph' />
+                </div>
             </div>
+
             <div id='graph' className="graph">
                 <ReactFlow elements={graphData} />
             </div>

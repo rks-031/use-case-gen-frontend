@@ -80,7 +80,7 @@ export default function CheckBoxSelector(props) {
                 </div>
                 <div className='button-container-check'>
                     <Button className="home-btn" variant="outlined" onClick={nextClick} >
-                        Save and Proceed to &nbsp;<b>{ConstantData.urlPath[props.keyName].nextName}</b>
+                        {props.num === '21' ? 'Generate Transaction flows':`Save and Proceed to &nbsp;<b>${ConstantData.urlPath[props.keyName].nextName}</b>`}
                     </Button>
                 </div>
             </div>

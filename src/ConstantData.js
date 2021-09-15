@@ -240,7 +240,7 @@ const ConstantData = {
                 'Based on your selections, these are all the transaction flows that are possible on the network.',
                 'Please review your selections. In case there are any parameters/nodes that are not in line with the transaction flows on your platform, please click on the (x) on the node to remove that particular flow.',
                 'Once the transaction flows are finalised, please export the data using the options provided (export as PDF, export as JSON).',
-                'Please share a copy of the exported files to ondc@qcin.org & <a href = "mailto: saransh.agarwal@qcin.org">saransh.agarwal@qcin.org</a>'
+                'Please share a copy of the exported files to ondc@qcin.org & saransh.agarwal@qcin.org'
             ]
         }
 
