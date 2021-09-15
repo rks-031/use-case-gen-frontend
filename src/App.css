@@ -127,6 +127,11 @@
     position: relative;
 }
 
+.g-main{
+    display: flex;
+    justify-content: center;
+}
+
 .step{
     position: absolute;
     right: 30px;
@@ -136,7 +141,6 @@
 .button-container-check{
     display: flex;
     justify-content: space-evenly;
-
 }
 
 /* info box */
@@ -184,6 +188,17 @@
     display: flex;
     justify-content: center;
     margin: 25px 0;
+    position: relative;
+}
+
+.step-graph{
+    position: absolute;
+    right: 50px;
+    color: #515151;
+}
+
+.graph-info{
+    width: 600px;
 }
 
 .graph{
