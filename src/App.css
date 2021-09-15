@@ -1,3 +1,131 @@
+
+
+.text-color {
+    color: #515151;
+}
+
+.x-ccenter { 
+    display: flex;
+    justify-content: center;
+}
+
+.check-box-card { 
+    min-width: 200px;
+    min-height: 200px;
+    max-width: 600px;
+    background: #edededb0!important;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+/* header */
+
+.header{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #edededb0;
+    padding: 10px 20px;
+    border-bottom: .5px solid #f1f1f1;
+}
+
+.b-logo{
+    height: 20px;
+}
+
+.b-padding{
+    padding-bottom: 5px;
+}
+
+.user-details {
+    color: #515151;
+    font-size: 14px;
+}
+
+
+/* home */
+
+.home {
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.user-info-card {
+    width: 350px;
+    height: 400px;
+    background: #edededb0!important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-width {
+    margin-top: 20px !important;
+    width: 250px;
+}
+
+.error-text {
+    color: #ff0000e8;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.card-head {
+    color: #515151;
+}
+
+.home-btn {
+    margin-top: 30px !important;
+}
+
+
+/* check box */
+
+.check-box-compo{
+    margin-top: 70px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.button-container-check{
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+/* info box */
+
+.info-box{
+    width: 500px;
+
+}
+
+.info-head{
+    margin-left: 10px;
+}
+
+.list-item{
+    display: flex;
+    margin: 10px 0;
+}
+
+.list-text{
+    width: 470px;
+}
+
+.bullet{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #515151;
+    margin: 5px 10px;
+}
+
+
 .all-dropdown{
     display: grid;
     grid-template-columns: 50% 50%;
@@ -22,6 +150,17 @@
 
 .label-head{
     padding-bottom: 5px;
+    position: relative;
+}
+
+.box-id-text{
+    position: absolute;
+    left: 0;
+}
+
+.close-end {
+    position: absolute;
+    right: 0;
 }
 
 .select-btns{
