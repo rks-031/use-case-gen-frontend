@@ -142,7 +142,6 @@ export default function Graph() {
                 y += 150;
             }
         }
-
         setgraphData(gDataArr);
     }
 
@@ -152,20 +151,16 @@ export default function Graph() {
 
     const downloadPdf = () => {
         const input = document.getElementById('graph');
-        html2canvas(input)
-            .then((canvas) => {
-                debugger
-                const imgData = canvas.toDataURL('image/png');
-                var width = canvas.width;
-                var height = canvas.height;
-                var millimeters = {};
-                millimeters.width = Math.floor(width * 0.264583);
-                millimeters.height = Math.floor(height * 0.264583);
-                const pdf = new jsPDF("l", "mm", "a4");
-                pdf.addImage(imgData, 'JPEG', 0, 0, millimeters.width, millimeters.height);
-                // pdf.output('dataurlnewwindow');
-                pdf.save("Beckn.pdf");
-            })
+        html2canvas(input, {
+            scale: 2
+        }).then((canvas) => {
+            const imgData = canvas.toDataURL('image/png');
+
+            var link = document.createElement('a');
+            link.download = 'filename.png';
+            link.href = imgData
+            link.click();
+        })
             ;
     }
 
