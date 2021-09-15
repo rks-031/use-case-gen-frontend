@@ -131,7 +131,7 @@ const initialState = {
         ],
         on_rating: [
             [
-                { name: 'Acknowledgement of rating', checked: false }, ,
+                { name: 'Acknowledgement of rating', checked: false },
                 { name: 'Feedback form', checked: false },
             ]
         ],
