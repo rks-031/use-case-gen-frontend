@@ -19,9 +19,28 @@ export default function Graph() {
     let history = useHistory();
     const [state] = useContext(Context);
     const [graphData, setgraphData] = useState([]);
-    const [aa, setaa] = useState('');
+
+    const makeDataForAlgo = () => {
+        var crrData = { ...state.apiFilterData }
+        var newData = {};
+        orderby.forEach(item => {
+            newData[item] = [];
+            crrData[item].forEach(item2 => {
+                var strCr = ''
+                item2.forEach(item3 => {
+                    if (item3.checked) {
+                        strCr = strCr + item3.name + ', '
+                    }
+                })
+                if (strCr !== '') newData[item].push(strCr);
+            })
+        })
+        xgenerateGraphData(newData);
+        // setalgoData(newData);
+    }
+
     useEffect(() => {
-        xgenerateGraphData()
+        makeDataForAlgo();
     }, []);
 
 
@@ -38,7 +57,7 @@ export default function Graph() {
         return '';
     }
 
-    const xgenerateGraphData = () => {
+    const xgenerateGraphData = (data) => {
         var gDataArr = [];
         var i = 0;
         var j = 0;
@@ -52,8 +71,8 @@ export default function Graph() {
                 var y1 = y + 200;
                 var cpId = [];
                 item.forEach(aItem => {
-                    if (state.checkedData[aItem[0]].length > 0) {
-                        state.checkedData[aItem[0]].forEach((label) => {
+                    if (data[aItem[0]].length > 0) {
+                        data[aItem[0]].forEach((label) => {
                             i++;
                             gDataArr.push({
                                 id: i, className: colorClass(aItem[0]), data: {
@@ -71,13 +90,13 @@ export default function Graph() {
                             }
                         })
                     }
-                    if (state.checkedData[aItem[1]].length > 0) {
-                        state.checkedData[aItem[1]].forEach((label) => {
+                    if (data[aItem[1]].length > 0) {
+                        data[aItem[1]].forEach((label) => {
                             i++;
                             gDataArr.push({
                                 id: i, className: colorClass(aItem[1]), data: {
                                     label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{aItem[1]
-                                    }</b><b>X</b></div><div>{label}</div></div>
+                                    }</b></div><div>{label}</div></div>
                                 }, position: { x: x1, y: y1 }
                             });
                             x1 += 300;
@@ -99,12 +118,13 @@ export default function Graph() {
                 })
 
             }
-            else if (state.checkedData[item].length > 0) {
+            else if (data[item].length > 0) {
                 // create nodes 
+                // <b className="close-end" onClick={() => closeAction(i)}>X</b>
                 newIdArr = [];
-                state.checkedData[item].forEach((label) => {
+                data[item].forEach((label) => {
                     i++;
-                    gDataArr.push({ id: i, className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{item}</b><b className="close-end" onClick={() => closeAction(i)}>X</b></div><div>{label}</div></div> }, position: { x: x, y: y } });
+                    gDataArr.push({ id: i, className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{item}</b></div><div>{label}</div></div> }, position: { x: x, y: y } });
                     newIdArr.push(i);
                     x += 300;
                     if (prIdArr.length > 0) {
@@ -122,7 +142,6 @@ export default function Graph() {
             }
         }
 
-        console.log(gDataArr);
         setgraphData(gDataArr);
     }
 
@@ -152,10 +171,11 @@ export default function Graph() {
     return (
         <div>
             <div className="button-container">
-                <Button variant="outlined" onClick={() => history.goBack()}>back</Button>
+                <Button variant="outlined" onClick={() => history.push('/')}>home</Button>
+                <Button variant="outlined" style={{marginLeft:'10px'}} onClick={downloadPdf}>export</Button>
             </div>
             <div className="button-container">
-                <Button variant="outlined" onClick={downloadPdf}>download</Button>
+                
             </div>
             <div id='graph' className="graph">
                 <ReactFlow elements={graphData} />

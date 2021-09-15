@@ -4,7 +4,7 @@ import CheckBoxSelector from '../component/CheckBoxSelector';
 export default function Status() {
     return (
         <div>
-            <CheckBoxSelector keyName="status" />
+            <CheckBoxSelector keyName="status" num='10'/>
         </div>
     )
 }

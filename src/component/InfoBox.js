@@ -14,7 +14,7 @@ export default function InfoBox(props) {
 
     return (
         <div className='info-box text-color'>
-            <h3 className='text-color info-head'>{ConstantData.info[props.keyName].head}</h3>
+            <h3 className='x-ccenter'>Notes to user</h3>
             {InfoList()}
         </div>
     )

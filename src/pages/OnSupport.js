@@ -4,7 +4,7 @@ import CheckBoxSelector from '../component/CheckBoxSelector';
 export default function OnSupport() {
     return (
         <div>
-            <CheckBoxSelector keyName="on_support" />
+            <CheckBoxSelector keyName="on_support" num='21'/>
         </div>
     )
 }

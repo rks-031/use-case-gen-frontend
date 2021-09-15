@@ -6,7 +6,7 @@ export default function OnSelect() {
     
     return (
         <div>
-            <CheckBoxSelector keyName="on_select"/>
+            <CheckBoxSelector keyName="on_select" num='5'/>
         </div>
     )
 }
