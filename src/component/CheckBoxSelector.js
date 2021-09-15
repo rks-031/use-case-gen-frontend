@@ -48,11 +48,11 @@ export default function CheckBoxSelector(props) {
         history.push(`/${ConstantData.urlPath[props.keyName].next}`);
     }
 
-    // const backClick = () => {
-    //     setstate({ ...state, checkedData: { ...state.checkedData, [props.keyName]: [...selected] } });
-    //     history.goBack();
+    const backClick = () => {
+        history.goBack();
 
-    // }
+    }
+
     const addMore = () => {
         console.log(state.apiFilterData[props.keyName].length);
         if (state.apiFilterData[props.keyName].length < 3) {
@@ -79,8 +79,11 @@ export default function CheckBoxSelector(props) {
                     <div>Add another <b>{props.keyName}</b> use case</div>
                 </div>
                 <div className='button-container-check'>
-                    <Button className="home-btn" variant="outlined" onClick={nextClick} >
-                        {props.num === '21' ? 'Generate Transaction flows':`Save and Proceed to ${ConstantData.urlPath[props.keyName].nextName}`}
+                    <Button className="home-btn" variant="outlined" onClick={backClick} >
+                        back
+                    </Button>
+                    <Button className="home-btn" style={{ marginLeft: '10px' }} variant="outlined" onClick={nextClick} >
+                        {props.num === '21' ? 'Generate Transaction flows' : `Save and Proceed to ${ConstantData.urlPath[props.keyName].nextName}`}
                     </Button>
                 </div>
             </div>
