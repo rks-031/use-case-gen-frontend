@@ -79,6 +79,7 @@ export default function Graph() {
         var prIdArr = [];
         var newIdArr = [];
         for (const item of newOrder) {
+            debugger;
             if (Array.isArray(item)) {
                 var x1 = x;
                 var y1 = y + 250;
@@ -89,8 +90,9 @@ export default function Graph() {
                             i++;
                             gDataArr.push({
                                 id: `${i}`, className: colorClass(aItem[0]), data: {
-                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[0]}</b><b className="close-end" onClick={() => closeAction(aItem[0], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_')?'BBP':'BAP'}</div></div></div>
-                                }, position: { x: x, y: y }
+                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[0]}</b><b className="close-end" onClick={() => closeAction(aItem[0], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BBP' : 'BAP'}</div></div></div>,
+                                    lolz: 'chirag'
+                                }, position: { x: x, y: y },
                             });
                             cpId.push(i);
                             x += 300;
@@ -107,8 +109,9 @@ export default function Graph() {
                             i++;
                             gDataArr.push({
                                 id: `${i}`, className: colorClass(aItem[1]), data: {
-                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[1]}</b> <b className="close-end" onClick={() => closeAction(aItem[1], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_')?'BBP':'BAP'}</div></div></div>
-                                }, position: { x: x1, y: y1 }
+                                    lolx: 'chirag',
+                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[1]}</b> <b className="close-end" onClick={() => closeAction(aItem[1], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BBP' : 'BAP'}</div></div></div>
+                                ,lolx: 'chirag'}, position: { x: x1, y: y1 },
                             });
                             x1 += 300;
                             if (cpId.length > 0) {
@@ -135,7 +138,7 @@ export default function Graph() {
                 newIdArr = [];
                 data[item].forEach((label) => {
                     i++;
-                    gDataArr.push({ id: `${i}`, className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{item}</b><b className="close-end" onClick={() => closeAction(item, label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_')?'BBP':'BAP'}</div></div></div> }, position: { x: x, y: y } });
+                    gDataArr.push({ id: `${i}`,lolx: 'chirag', className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{item}</b><b className="close-end" onClick={() => closeAction(item, label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BBP' : 'BAP'}</div></div></div> }, position: { x: x, y: y } });
                     newIdArr.push(i);
                     x += 300;
                     if (prIdArr.length > 0) {
@@ -184,18 +187,31 @@ export default function Graph() {
     }
 
     const downloadPdf = () => {
+        let userDetails = state.userInfo;
         const input = document.getElementById('graph');
         html2canvas(input, {
-            scale: 2
+            scale: 3
         }).then((canvas) => {
             const imgData = canvas.toDataURL('image/png');
 
             var link = document.createElement('a');
-            link.download = 'filename.png';
+            link.download = userDetails.user + '_' + userDetails.name_org + '_' + userDetails.name_role_timestamp + '.png';
             link.href = imgData
             link.click();
         })
             ;
+    }
+
+    const downloadJson = () => {
+        let userDetails = state.userInfo;
+
+
+        let data = graphData;
+        data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
+        var link = document.createElement('a');
+        link.download = userDetails.user + '_' + userDetails.name_org + '_' + userDetails.name_role_timestamp + '.json';
+        link.href = data;
+        link.click();
     }
 
     return (
@@ -218,6 +234,7 @@ export default function Graph() {
                 <Button variant="outlined" onClick={() => history.goBack()}>back</Button>
                 <Button variant="outlined" style={{ marginLeft: '10px' }} onClick={() => history.push('/')}>home</Button>
                 <Button variant="outlined" style={{ marginLeft: '10px' }} onClick={downloadPdf}>export</Button>
+                <Button variant="outlined" style={{ marginLeft: '10px' }} onClick={downloadJson}>export json</Button>
                 <div className="step-graph">Step 22 of 22</div>
             </div>
 
