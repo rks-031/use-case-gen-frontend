@@ -4,7 +4,7 @@ import CheckBoxSelector from '../component/CheckBoxSelector';
 export default function OnInit() {
     return (
         <div>
-            <CheckBoxSelector keyName="on_init" />
+            <CheckBoxSelector keyName="on_init" num='7'/>
         </div>
     )
 }

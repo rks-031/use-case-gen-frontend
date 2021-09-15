@@ -16,7 +16,7 @@ export default function Home() {
     const [error, seterror] = useState(false)
 
     useEffect(() => {
-        getApiData()
+        // getApiData()
     }, []);
 
 
@@ -70,8 +70,8 @@ export default function Home() {
                         name="name_role_timestamp"
                         onChange={handleChange}
                     >
-                        <MenuItem value={10}>Retail BAP</MenuItem>
-                        <MenuItem value={20}>Retail BPP</MenuItem>
+                        <MenuItem value='Retail BAP'>Retail BAP</MenuItem>
+                        <MenuItem value='Retail BPP'>Retail BPP</MenuItem>
                     </Select>
                 </FormControl>
                 <Button className="home-btn" variant="outlined" onClick={onButtonClick} >

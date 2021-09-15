@@ -1,13 +1,13 @@
 const ConstantData = {
     urlPath: {
-        search: { curr: 'search', next: 'onsearch' },
-        on_search: { curr: 'onsearch', next: 'select' },
-        select: { curr: 'select', next: 'onselect' },
-        on_select: { curr: 'onselect', next: 'init' },
-        init: { curr: 'init', next: 'oninit' },
-        on_init: { curr: 'oninit', next: 'confirm' },
-        confirm: { curr: 'confirm', next: 'onconfirm' },
-        on_confirm: { curr: 'onconfirm', next: 'status' },
+        search: { curr: 'search', next: 'onsearch' ,nextName: 'on_search' },
+        on_search: { curr: 'onsearch', next: 'select' , nextName:'select'},
+        select: { curr: 'select', next: 'onselect' ,nextName: 'on_select'},
+        on_select: { curr: 'onselect', next: 'init' , nextName:'init'},
+        init: { curr: 'init', next: 'oninit' , nextName: 'on_init'},
+        on_init: { curr: 'oninit', next: 'confirm' , nextName:'confirm'},
+        confirm: { curr: 'confirm', next: 'onconfirm',nextName: 'on_confirm'},
+        on_confirm: { curr: 'onconfirm', next: 'status', nextName: 'status' },
         status: { curr: 'status', next: 'onstatus' },
         on_status: { curr: 'onstatus', next: 'track' },
         track: { curr: 'track', next: 'ontrack' },
@@ -33,33 +33,30 @@ const ConstantData = {
             head: 'Use Cases for search',
             list: [
                 'The Search API allows buyers to discover catalogs published by the providers on the network.',
-                'As a BAP: please indicate the different ways in which a customer can search for catalogs. For ex: customers can search by the name of the item.',
-                'As a BPP: please indicate the different search queries that you can accept and respond with catalogs.',
-                'Please indicate your selections by selecting the check-boxes for each parameter mentioned below. You may generate single parameter or multi-parameter use cases.',
-                'Each use case can have multiple parameters, but please try to generate unique combinations of search queries.',
-                'Please limit the number of use cases to 3 most commonly used options to be immediately implemented.'
+                'BAP: indicate the different ways in which a customer can search for catalogs',
+                'BPP: indicate expected search queries for the catalogs',
+                'Select relevant checkboxes for unique use cases. Use cases may contain multiple parameters',
+                'Use case limit = 3'
             ]
         },
         on_search: {
             head: 'Use Cases for on_search',
             list: [
-                'The on_search API allows sellers to respond to a search call with a catalog matching the search query.',
-                'As a BAP: please indicate the different kinds of catalogs that you wish to display to the customers, based on your search use cases.',
-                'As a BPP: please indicate the ways in which you will be able to publish your catalogs as a response to search use cases that you accept.',
-                'Please indicate your selections by selecting the check-boxes for each parameter mentioned below. You may generate single parameter or multi-parameter use cases.',
-                'Each use case can have multiple parameters, but please try to generate unique combinations of catalogs as possible.',
-                'Please limit the number of use cases to 3 most commonly used options to be immediately implemented.'
+                'The on_search API allows sellers to respond to a search call with a catalog matching the search query',
+                'BAP: indicate expected catalog for search queries',
+                'BPP: indicate catalogs that can be published as search results',
+                'Select relevant checkboxes for unique use cases. Use cases may contain multiple parameters',
+                'Use case limit = 3',
             ]
         },
         select: {
             head: 'Use Cases for select',
             list: [
-                'The select API allows buyers to build a cart with items of their choice from the catalog received in the on_search response.',
-                'As a BAP: please indicate the different entities that can be added to a cart.',
-                'As a BPP: please indicate the accepted entities that can be received in a cart.',
-                'Please indicate your selections by selecting the check-boxes for each parameter mentioned below. You may generate single parameter or multi-parameter use cases.',
-                'Each use case can have multiple parameters, but please try to generate unique combinations of catalogs as possible.',
-                'Please limit the number of use cases to 3 most commonly used options to be immediately implemented.'
+                'The select API allows buyers to build a cart with items of their choice from the catalog received in the on_search response',
+                'BAP: indicate the different entities that can be added to a cart',
+                'BPP: indicate the expected entities that can be received in a cart',
+                'Select relevant checkboxes for unique use cases. Use cases may contain multiple parameters',
+                'Use case limit = 3',
             ]
         },
         on_select: {

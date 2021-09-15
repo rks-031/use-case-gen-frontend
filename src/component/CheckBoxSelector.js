@@ -11,66 +11,80 @@ import { useHistory } from "react-router-dom";
 export default function CheckBoxSelector(props) {
     let history = useHistory();
     const [state, setstate] = useContext(Context);
-    const [selected, setselected] = useState(state.checkedData[props.keyName]);
     console.log(props);
-    const handleChange = (event) => {
-        if (event.target.checked) {
-            setselected([...selected, event.target.name]);
-        } else {
-            selected.splice(selected.indexOf(event.target.name), 1);
-            setselected([...selected]);
-        }
+    const handleChange = (event, index, index2) => {
+        console.log(event.target.name, index, index2);
+        state.apiFilterData[props.keyName][index][index2].checked = event.target.checked;
+        setstate({ ...state, apiFilterData: { ...state.apiFilterData, [props.keyName]: state.apiFilterData[props.keyName] } })
     }
 
 
     const CheckBoxs = () => {
-        console.log(state.apiFilterData[props.keyName]);
-        return state.apiFilterData[props.keyName].map(item => {
-            return <FormControlLabel
-                key={item}
-                control={
-                    <Checkbox
-                        checked={selected.indexOf(item) >= 0}
-                        onChange={handleChange}
-                        name={item}
-                        color="primary"
-                    />
+        return state.apiFilterData[props.keyName].map((item, index) => {
+            return <Card className="check-box-card " key={index + 'c1'}>
+                <div><b>{props.keyName}&nbsp;Use Cases {index + 1}</b></div>
+                {
+                    item.map((item2, index2) => {
+                        return <FormControlLabel
+                            key={item2.name + ' ' + index}
+                            control={
+                                <Checkbox
+                                    checked={item2.checked}
+                                    onChange={(e) => handleChange(e, index, index2)}
+                                    name={item2.name}
+                                    color="primary"
+                                />
+                            }
+                            label={item2.name}
+                        />
+                    })
                 }
-                label={item}
-            />
+            </Card>
         })
     }
 
 
     const nextClick = () => {
-        console.log(selected);
-        setstate({...state,checkedData:{...state.checkedData,[props.keyName]:[...selected]}});
         history.push(`/${ConstantData.urlPath[props.keyName].next}`);
     }
 
-    const backClick = () => {
-        setstate({...state,checkedData:{...state.checkedData,[props.keyName]:[...selected]}});
-        history.goBack();
+    // const backClick = () => {
+    //     setstate({ ...state, checkedData: { ...state.checkedData, [props.keyName]: [...selected] } });
+    //     history.goBack();
 
+    // }
+    const addMore = () => {
+        console.log(state.apiFilterData[props.keyName].length);
+        if (state.apiFilterData[props.keyName].length < 3) {
+            var copyData = JSON.parse(JSON.stringify([...state.apiFilterData[props.keyName][0]]));
+            var newCpData = copyData.map(item => {
+                item.checked = false;
+                return item
+            })
+            state.apiFilterData[props.keyName].push([...newCpData]);
+            setstate({ ...state, apiFilterData: { ...state.apiFilterData, [props.keyName]: state.apiFilterData[props.keyName] } })
+        }
     }
-
 
 
     return (
         <div className="check-box-compo">
-            <Card className="check-box-card ">
-                <h2 className="text-color x-ccenter">{props.keyName}</h2>
+            <div className="check-box-card-x">
+                <div className="text-color x-ccenter box-head"><b>{props.keyName}</b>&nbsp;Use Cases</div>
+                <div className="step">Step {props.num} of 22</div>
+                <InfoBox keyName={props.keyName} />
                 {CheckBoxs()}
+                <div className='add-btn-container' onClick={addMore}>
+                    <div className="add-cir-btn">+</div>
+                    <div>Add another <b>{props.keyName}</b> use case</div>
+                </div>
                 <div className='button-container-check'>
-                    <Button className="home-btn" variant="outlined" onClick={backClick} >
-                        back
-                    </Button>
                     <Button className="home-btn" variant="outlined" onClick={nextClick} >
-                        next
+                        Save and Proceed to &nbsp;<b>{ConstantData.urlPath[props.keyName].nextName}</b>
                     </Button>
                 </div>
-            </Card>
-            <InfoBox keyName={props.keyName} />
+            </div>
+
         </div>
     )
 }

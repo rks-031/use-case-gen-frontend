@@ -4,7 +4,7 @@ import CheckBoxSelector from '../component/CheckBoxSelector';
 export default function Rating() {
     return (
         <div>
-            <CheckBoxSelector keyName="rating" />
+            <CheckBoxSelector keyName="rating" num='18'/>
         </div>
     )
 }

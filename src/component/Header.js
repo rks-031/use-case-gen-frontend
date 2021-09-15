@@ -8,9 +8,9 @@ export default function Header() {
         <div className="header">
              <img className="b-logo" src={logo} alt="React Logo" />
              <div className='user-details'>
-                 <div className="b-padding"><b>Name: </b></div>
-                 <div className="b-padding"><b>Organisation Name: </b></div>
-                 <div><b>Role in the Retail network: </b></div>
+                 {state.userInfo.user?<div className="b-padding">Name: <b>{state.userInfo.user}</b></div>:''}
+                 {state.userInfo.name_org?<div className="b-padding">Organisation Name: <b>{state.userInfo.name_org}</b></div>:''}
+                 {state.userInfo.name_role_timestamp?<div>Role in the Retail network: <b>{state.userInfo.name_role_timestamp}</b></div>:''}
              </div>
         </div>
     )
