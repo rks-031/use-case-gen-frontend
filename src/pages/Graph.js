@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useMemo } from 'react';
 import { Context } from '../Store';
 import ReactFlow from 'react-flow-renderer';
 import Button from '@material-ui/core/Button';
@@ -18,11 +18,19 @@ const grayClr = ["rating", "on_rating", "support", "on_support"];
 
 export default function Graph() {
     let history = useHistory();
-    const [state] = useContext(Context);
+    const [state, setState] = useContext(Context);
     const [graphData, setgraphData] = useState([]);
+    const [iKey, setiKey] = useState(0);
 
-    const makeDataForAlgo = () => {
-        var crrData = { ...state.apiFilterData }
+    useEffect(
+        () => {
+            setiKey(iKey + 1);
+        }, [graphData]
+    );
+
+    const makeDataForAlgo = (x1data = { ...state.apiFilterData }) => {
+        console.log(1, x1data);
+        var crrData = x1data
         var newData = {};
         orderby.forEach(item => {
             newData[item] = [];
@@ -30,12 +38,16 @@ export default function Graph() {
                 var strCr = ''
                 item2.forEach(item3 => {
                     if (item3.checked) {
-                        strCr = strCr + item3.name + ', '
+                        strCr = strCr + item3.name + ','
                     }
                 })
-                if (strCr !== '') newData[item].push(strCr);
+                if (strCr !== '') {
+                    strCr = strCr.slice(0, -1);
+                    newData[item].push(strCr)
+                };
             })
         })
+        console.log(newData);
         xgenerateGraphData(newData);
         // setalgoData(newData);
     }
@@ -69,16 +81,15 @@ export default function Graph() {
         for (const item of newOrder) {
             if (Array.isArray(item)) {
                 var x1 = x;
-                var y1 = y + 200;
+                var y1 = y + 250;
                 var cpId = [];
                 item.forEach(aItem => {
                     if (data[aItem[0]].length > 0) {
                         data[aItem[0]].forEach((label) => {
                             i++;
                             gDataArr.push({
-                                id: i, className: colorClass(aItem[0]), data: {
-                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{aItem[0]
-                                    }</b></div><div>{label}</div></div>
+                                id: `${i}`, className: colorClass(aItem[0]), data: {
+                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[0]}</b><b className="close-end" onClick={() => closeAction(aItem[0], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_')?'BBP':'BAP'}</div></div></div>
                                 }, position: { x: x, y: y }
                             });
                             cpId.push(i);
@@ -86,7 +97,7 @@ export default function Graph() {
                             if (prIdArr.length > 0) {
                                 prIdArr.forEach(pId => {
                                     j++;
-                                    gDataArr.push({ id: 'e1-' + j, source: pId, target: i, arrowHeadType: 'arrow' })
+                                    gDataArr.push({ id: 'e1-' + j, source: `${pId}`, target: `${i}`, arrowHeadType: 'arrow' })
                                 })
                             }
                         })
@@ -95,21 +106,20 @@ export default function Graph() {
                         data[aItem[1]].forEach((label) => {
                             i++;
                             gDataArr.push({
-                                id: i, className: colorClass(aItem[1]), data: {
-                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{aItem[1]
-                                    }</b></div><div>{label}</div></div>
+                                id: `${i}`, className: colorClass(aItem[1]), data: {
+                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[1]}</b> <b className="close-end" onClick={() => closeAction(aItem[1], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_')?'BBP':'BAP'}</div></div></div>
                                 }, position: { x: x1, y: y1 }
                             });
                             x1 += 300;
                             if (cpId.length > 0) {
                                 cpId.forEach(pId => {
                                     j++;
-                                    gDataArr.push({ id: 'e1-' + j, source: pId, target: i, arrowHeadType: 'arrow' })
+                                    gDataArr.push({ id: 'e1-' + j, source: `${pId}`, target: `${i}`, arrowHeadType: 'arrow' })
                                 })
                             } else {
                                 prIdArr.forEach(pId => {
                                     j++;
-                                    gDataArr.push({ id: 'e1-' + j, source: pId, target: i, arrowHeadType: 'arrow' })
+                                    gDataArr.push({ id: 'e1-' + j, source: `${pId}`, target: `${i}`, arrowHeadType: 'arrow' })
                                 })
                             }
 
@@ -125,13 +135,13 @@ export default function Graph() {
                 newIdArr = [];
                 data[item].forEach((label) => {
                     i++;
-                    gDataArr.push({ id: i, className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{item}</b></div><div>{label}</div></div> }, position: { x: x, y: y } });
+                    gDataArr.push({ id: `${i}`, className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{item}</b><b className="close-end" onClick={() => closeAction(item, label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_')?'BBP':'BAP'}</div></div></div> }, position: { x: x, y: y } });
                     newIdArr.push(i);
                     x += 300;
                     if (prIdArr.length > 0) {
                         prIdArr.forEach(pId => {
                             j++;
-                            gDataArr.push({ id: 'e1-' + j, source: pId, target: i, arrowHeadType: 'arrow' })
+                            gDataArr.push({ id: 'e1-' + j, source: `${pId}`, target: `${i}`, arrowHeadType: 'arrow' })
                         })
                     }
                 })
@@ -139,15 +149,39 @@ export default function Graph() {
                 prIdArr = newIdArr;
 
                 x = 100;
-                y += 150;
+                y += 250;
             }
         }
-
+        console.log(33, gDataArr);
         setgraphData(gDataArr);
     }
 
-    const closeAction = (a) => {
-        console.log(a);
+    const closeAction = (key, label) => {
+        var splitStr = label.split(",");
+
+        for (let mainI = 0; mainI < state.apiFilterData[key].length; mainI++) {
+            var temArr = [];
+            splitStr.forEach(item2 => {
+                console.log(state.apiFilterData[key][mainI]);
+                for (let ci = 0; ci < state.apiFilterData[key][mainI].length; ci++) {
+                    if (item2 == state.apiFilterData[key][mainI][ci].name && state.apiFilterData[key][mainI][ci].checked) {
+                        temArr.push(ci);
+                        break;
+                    }
+                }
+            })
+            if (splitStr.length === temArr.length) {
+                temArr.forEach(i => {
+                    state.apiFilterData[key][mainI][i].checked = false;
+                })
+                break;
+            }
+        }
+
+
+        setState({ ...state, apiFilterData: { ...state.apiFilterData, [key]: state.apiFilterData[key] } });
+        makeDataForAlgo({ ...state.apiFilterData });
+
     }
 
     const downloadPdf = () => {
@@ -166,13 +200,27 @@ export default function Graph() {
                 // pdf.output('dataurlnewwindow');
                 pdf.save("Beckn.pdf");
             })
-            ;
     }
 
     return (
         <div>
             <div className="button-container">
-                <Button variant="outlined" onClick={() => history.push('/')}>home</Button>
+                <div className='color-codes'>
+                    <div className='c-padding'>
+                        <div className="color-bricks green-clr"></div><div className="color-text">Discovery APIs (search, on_search)</div>
+                    </div>
+                    <div className='c-padding '>
+                        <div className="color-bricks blue-clr"></div><div className="color-text">Order APIs (select, on_select, init, on_init, confirm, on_confirm)</div>
+                    </div>
+                    <div className='c-padding '>
+                        <div className="color-bricks red-clr"></div><div className="color-text">Fulfilment APIs (status, on_status, track, on_track, update, on_update, cancel, on_cancel)</div>
+                    </div>
+                    <div className='c-padding '>
+                        <div className="color-bricks gray-clr"></div><div className="color-text">Post-Fulfilment APIs (rating, on_rating, support, on_support)</div>
+                    </div>
+                </div>
+                <Button variant="outlined" onClick={() => history.goBack()}>back</Button>
+                <Button variant="outlined" style={{ marginLeft: '10px' }} onClick={() => history.push('/')}>home</Button>
                 <Button variant="outlined" style={{ marginLeft: '10px' }} onClick={downloadPdf}>export</Button>
                 <div className="step-graph">Step 22 of 22</div>
             </div>
