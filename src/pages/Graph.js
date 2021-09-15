@@ -3,6 +3,8 @@ import { Context } from '../Store';
 import ReactFlow from 'react-flow-renderer';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const orderby = ["search", "on_search", "select", "on_select", "init", "on_init", "confirm", "on_confirm", "status", "on_status", "track", "on_track", "update", "on_update", "cancel", "on_cancel", "rating", "on_rating", "support", "on_support"]
 
@@ -17,7 +19,7 @@ export default function Graph() {
     let history = useHistory();
     const [state] = useContext(Context);
     const [graphData, setgraphData] = useState([]);
-const [aa, setaa] = useState('');
+    const [aa, setaa] = useState('');
     useEffect(() => {
         xgenerateGraphData()
     }, []);
@@ -102,7 +104,7 @@ const [aa, setaa] = useState('');
                 newIdArr = [];
                 state.checkedData[item].forEach((label) => {
                     i++;
-                    gDataArr.push({ id: i, className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{item}</b><b className="close-end" onClick={()=>closeAction(i)}>X</b></div><div>{label}</div></div> }, position: { x: x, y: y } });
+                    gDataArr.push({ id: i, className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b>{item}</b><b className="close-end" onClick={() => closeAction(i)}>X</b></div><div>{label}</div></div> }, position: { x: x, y: y } });
                     newIdArr.push(i);
                     x += 300;
                     if (prIdArr.length > 0) {
@@ -128,12 +130,34 @@ const [aa, setaa] = useState('');
         console.log(a);
     }
 
+    const downloadPdf = () => {
+        const input = document.getElementById('graph');
+        html2canvas(input)
+            .then((canvas) => {
+                debugger
+                const imgData = canvas.toDataURL('image/png');
+                var width = canvas.width;
+                var height = canvas.height;
+                var millimeters = {};
+                millimeters.width = Math.floor(width * 0.264583);
+                millimeters.height = Math.floor(height * 0.264583);
+                const pdf = new jsPDF("l", "mm", "a4");
+                pdf.addImage(imgData, 'JPEG', 0, 0, millimeters.width, millimeters.height);
+                // pdf.output('dataurlnewwindow');
+                pdf.save("Beckn.pdf");
+            })
+            ;
+    }
+
     return (
         <div>
             <div className="button-container">
-                <Button variant="outlined" onClick={()=> history.goBack()}>back</Button>
+                <Button variant="outlined" onClick={() => history.goBack()}>back</Button>
             </div>
-            <div className="graph">
+            <div className="button-container">
+                <Button variant="outlined" onClick={downloadPdf}>download</Button>
+            </div>
+            <div id='graph' className="graph">
                 <ReactFlow elements={graphData} />
             </div>
         </div>
