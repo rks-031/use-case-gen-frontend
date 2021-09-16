@@ -74,7 +74,7 @@ export default function Home() {
                 <TextField id="standard-basic" className="input-width" name="user" value={state.userInfo.user} label="Name" onChange={handleChange} />
                 <TextField id="standard-basic" className="input-width" name="name_org" value={state.userInfo.name_org} label="Organisation Name" onChange={handleChange} />
                 <FormControl className="input-width">
-                    <InputLabel id="demo-simple-select-label">Role in the Retail network</InputLabel>
+                    <InputLabel id="demo-simple-select-label">Role in the network</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
