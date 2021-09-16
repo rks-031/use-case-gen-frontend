@@ -245,8 +245,8 @@ export default function Graph() {
                     id: node.id,
                     call: node.nodeData.call,
                     parents: node.nodeData.parents,
-                    childrens: node.nodeData.childrens,
-                    attributes: node.label,
+                    children: node.nodeData.childrens,
+                    attributes: node.label.split(','),
                     label: node.nodeData.label
 
                 })
@@ -256,7 +256,7 @@ export default function Graph() {
             participant_name:userDetails.user ,
             organisation_name:userDetails.name_org,
             role_in_network:userDetails.name_role_timestamp,
-            use_case:use_case,
+            use_cases:use_case,
         }
         data = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data));
         var link = document.createElement('a');
