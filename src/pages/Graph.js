@@ -122,7 +122,7 @@ export default function Graph() {
                                     attributes: [],
                                     label:label,
                                 }, className: colorClass(aItem[1]), data: {
-                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[1]}</b> <b className="close-end" onClick={() => closeAction(aItem[1], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BPP' : 'BAP'}</div></div></div>
+                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[1]}</b> <b className="close-end" onClick={() => closeAction(aItem[1], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{aItem[1].includes('_') ? 'BPP' : 'BAP'}</div></div></div>
                                 }, position: { x: x1, y: y1 },
                             });
                             x1 += 300;
