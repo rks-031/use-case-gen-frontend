@@ -246,7 +246,7 @@ export default function Graph() {
                     call: node.nodeData.call,
                     parents: node.nodeData.parents,
                     children: node.nodeData.childrens,
-                    attributes: node.label.split(','),
+                    attributes: node.nodeData.label.split(','),
                     label: node.nodeData.label
 
                 })
