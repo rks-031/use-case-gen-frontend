@@ -159,7 +159,8 @@ const initialState = {
     userInfo: {
         user: '',
         name_org: '',
-        name_role_timestamp: ''
+        name_role_timestamp: '',
+        agree: false
     }
 }
 

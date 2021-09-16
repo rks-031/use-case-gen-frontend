@@ -76,9 +76,13 @@
     justify-content: space-around;
 }
 
+.home-checkbox{
+    margin-top: 35px;
+}
+
 .user-info-card {
-    width: 350px;
-    height: 400px;
+    width: 400px;
+    height: 450px;
     background: #edededb0!important;
     display: flex;
     flex-direction: column;
@@ -100,9 +104,9 @@
     color: #515151;
 }
 
-.home-btn {
+/* .home-btn {
     margin-top: 30px !important;
-}
+} */
 
 
 /* check box */
@@ -128,25 +132,25 @@
 }
 
 .color-codes{
-    font-size: 12px;
+    font-size: 14px;
     color: #515151;
     position: absolute;
     left: 0;
-    width: 450px;
+    width: 270px;
 }
 .color-text{
-    width: 390px;
+    width: 150px;
 }
 .c-padding{
     display: flex;
     align-items: center;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .color-bricks {
-    height: 10px;
-    width: 20px;
-    margin: 0 20px;
+    height: 15px;
+    width: 50px;
+    margin: 0 20px 0 50px;
 }
 
 .g-main{

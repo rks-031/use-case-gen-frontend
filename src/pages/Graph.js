@@ -219,16 +219,16 @@ export default function Graph() {
             <div className="button-container">
                 <div className='color-codes'>
                     <div className='c-padding'>
-                        <div className="color-bricks green-clr"></div><div className="color-text">Discovery APIs (search, on_search)</div>
+                        <div className="color-bricks green-clr"></div><div className="color-text">Discovery APIs</div>
                     </div>
                     <div className='c-padding '>
-                        <div className="color-bricks blue-clr"></div><div className="color-text">Order APIs (select, on_select, init, on_init, confirm, on_confirm)</div>
+                        <div className="color-bricks blue-clr"></div><div className="color-text">Order APIs</div>
                     </div>
                     <div className='c-padding '>
-                        <div className="color-bricks red-clr"></div><div className="color-text">Fulfilment APIs (status, on_status, track, on_track, update, on_update, cancel, on_cancel)</div>
+                        <div className="color-bricks red-clr"></div><div className="color-text">Fulfilment APIs</div>
                     </div>
                     <div className='c-padding '>
-                        <div className="color-bricks gray-clr"></div><div className="color-text">Post-Fulfilment APIs (rating, on_rating, support, on_support)</div>
+                        <div className="color-bricks gray-clr"></div><div className="color-text">Post-Fulfilment APIs</div>
                     </div>
                 </div>
                 <Button variant="outlined" onClick={() => history.goBack()}>back</Button>
