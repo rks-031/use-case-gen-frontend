@@ -115,8 +115,8 @@ const initialState = {
         ],
         on_cancel: [
             [
-                { name: 'Cancelled Order with no terns', checked: false },
-                { name: 'Cancelled Order with refund terns', checked: false },
+                { name: 'Cancelled Order with no terms', checked: false },
+                { name: 'Cancelled Order with refund terms', checked: false },
             ]
         ],
         rating: [
