@@ -79,7 +79,7 @@ export default function Graph() {
         var prIdArr = [];
         var newIdArr = [];
         for (const item of newOrder) {
-            debugger;
+            // debugger;
             if (Array.isArray(item)) {
                 var x1 = x;
                 var y1 = y + 250;
@@ -90,7 +90,7 @@ export default function Graph() {
                             i++;
                             gDataArr.push({
                                 id: `${i}`, className: colorClass(aItem[0]), data: {
-                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[0]}</b><b className="close-end" onClick={() => closeAction(aItem[0], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BBP' : 'BAP'}</div></div></div>,
+                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[0]}</b><b className="close-end" onClick={() => closeAction(aItem[0], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BPP' : 'BAP'}</div></div></div>,
                                     lolz: 'chirag'
                                 }, position: { x: x, y: y },
                             });
@@ -110,7 +110,7 @@ export default function Graph() {
                             gDataArr.push({
                                 id: `${i}`, className: colorClass(aItem[1]), data: {
                                     lolx: 'chirag',
-                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[1]}</b> <b className="close-end" onClick={() => closeAction(aItem[1], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BBP' : 'BAP'}</div></div></div>
+                                    label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{aItem[1]}</b> <b className="close-end" onClick={() => closeAction(aItem[1], label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BPP' : 'BAP'}</div></div></div>
                                 ,lolx: 'chirag'}, position: { x: x1, y: y1 },
                             });
                             x1 += 300;
@@ -138,7 +138,7 @@ export default function Graph() {
                 newIdArr = [];
                 data[item].forEach((label) => {
                     i++;
-                    gDataArr.push({ id: `${i}`,lolx: 'chirag', className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{item}</b><b className="close-end" onClick={() => closeAction(item, label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BBP' : 'BAP'}</div></div></div> }, position: { x: x, y: y } });
+                    gDataArr.push({ id: `${i}`,lolx: 'chirag', className: colorClass(item), data: { label: <div><div className="label-head"><b className='box-id-text'>{i}</b><b className='node-item'>{item}</b><b className="close-end" onClick={() => closeAction(item, label)}>X</b></div><div className="node-label">{label}</div><div className="node-tag"><div className="tag-box">{item.includes('_') ? 'BPP' : 'BAP'}</div></div></div> }, position: { x: x, y: y } });
                     newIdArr.push(i);
                     x += 300;
                     if (prIdArr.length > 0) {
@@ -219,16 +219,16 @@ export default function Graph() {
             <div className="button-container">
                 <div className='color-codes'>
                     <div className='c-padding'>
-                        <div className="color-bricks green-clr"></div><div className="color-text">Discovery APIs (search, on_search)</div>
+                        <div className="color-bricks green-clr"></div><div className="color-text">Discovery APIs</div>
                     </div>
                     <div className='c-padding '>
-                        <div className="color-bricks blue-clr"></div><div className="color-text">Order APIs (select, on_select, init, on_init, confirm, on_confirm)</div>
+                        <div className="color-bricks blue-clr"></div><div className="color-text">Order APIs</div>
                     </div>
                     <div className='c-padding '>
-                        <div className="color-bricks red-clr"></div><div className="color-text">Fulfilment APIs (status, on_status, track, on_track, update, on_update, cancel, on_cancel)</div>
+                        <div className="color-bricks red-clr"></div><div className="color-text">Fulfilment APIs</div>
                     </div>
                     <div className='c-padding '>
-                        <div className="color-bricks gray-clr"></div><div className="color-text">Post-Fulfilment APIs (rating, on_rating, support, on_support)</div>
+                        <div className="color-bricks gray-clr"></div><div className="color-text">Post-Fulfilment APIs</div>
                     </div>
                 </div>
                 <Button variant="outlined" onClick={() => history.goBack()}>back</Button>

@@ -9,11 +9,13 @@ import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { useHistory } from "react-router-dom";
 import InfoBox from '../component/InfoBox';
+import Checkbox from '@material-ui/core/Checkbox';
 
 export default function Home() {
     let history = useHistory();
     const [state, setstate] = useContext(Context);
     const [error, seterror] = useState(false)
+    const [errorMsg, seterrorMsg] = useState('')
 
     useEffect(() => {
         // getApiData()
@@ -26,10 +28,16 @@ export default function Home() {
     };
 
     const onButtonClick = () => {
-        if (state.userInfo.user && state.userInfo.name_org && state.userInfo.name_role_timestamp) {
+        if (state.userInfo.user && state.userInfo.name_org && state.userInfo.name_role_timestamp && state.userInfo.agree) {
             seterror(false);
+            seterrorMsg('')
             history.push('/search');
-        } else {
+        } else if ( !state.userInfo.agree) {
+            seterrorMsg('Please agree to code sharing')
+            seterror(true);
+        }
+        else {
+            seterrorMsg('All Fields Are Mandatory')
             seterror(true);
         }
     }
@@ -48,11 +56,15 @@ export default function Home() {
             } else {
                 newData[item.api] = [item.label];
                 state.checkedData[item.api] = []
-                setstate({...state,checkedData:{...state.checkedData}});
+                setstate({ ...state, checkedData: { ...state.checkedData } });
             }
         });
-        setstate({...state,apiFilterData:newData});
+        setstate({ ...state, apiFilterData: newData });
         return newData;
+    }
+
+    const checkboxClick = (e) => {
+        setstate({...state,userInfo:{...state.userInfo,agree:e.target.checked}})
     }
 
     return (
@@ -74,12 +86,21 @@ export default function Home() {
                         <MenuItem value='Retail BPP'>Retail BPP</MenuItem>
                     </Select>
                 </FormControl>
+                <div className="home-checkbox">
+                    <Checkbox
+                        checked={state.userInfo.agree}
+                        onChange={checkboxClick}
+                        color="primary"
+                        inputProps={{ 'aria-label': 'secondary checkbox' }}
+                    />
+                    <a href="https://beckn.org/code-of-sharing/">I agree to the code of sharing</a>
+                </div>
                 <Button className="home-btn" variant="outlined" onClick={onButtonClick} >
                     proceed
                 </Button>
-                {error ? <div className="error-text">All Fields Are Mandatory</div> : ''}
-            </Card> 
-            <InfoBox keyName='home'/>
+                {error ? <div className="error-text">{errorMsg}</div> : ''}
+            </Card>
+            <InfoBox keyName='home' />
         </div>
     )
 }
