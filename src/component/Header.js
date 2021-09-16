@@ -10,7 +10,7 @@ export default function Header() {
              <div className='user-details'>
                  {state.userInfo.user?<div className="b-padding">Name: <b>{state.userInfo.user}</b></div>:''}
                  {state.userInfo.name_org?<div className="b-padding">Organisation Name: <b>{state.userInfo.name_org}</b></div>:''}
-                 {state.userInfo.name_role_timestamp?<div>Role in the Retail network: <b>{state.userInfo.name_role_timestamp}</b></div>:''}
+                 {state.userInfo.name_role_timestamp?<div>Role in the network: <b>{state.userInfo.name_role_timestamp}</b></div>:''}
              </div>
         </div>
     )
