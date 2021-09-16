@@ -215,7 +215,7 @@ const ConstantData = {
                 'Based on your selections, the possible transaction flows are depicted below',
                 'Click on (x) to remove a particular node in the transaction flow',
                 'Export the final flows using the options provided (Export Image, Export JSON).',
-                'Share a copy of both exported files to ondc@qcin.org & saransh.agarwal@qcin.org'
+                'Share a copy of both exported files to ondc@qcin.org'
             ]
         }
 
