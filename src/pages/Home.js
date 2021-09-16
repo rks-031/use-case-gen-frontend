@@ -33,7 +33,7 @@ export default function Home() {
             seterrorMsg('')
             history.push('/search');
         } else if ( !state.userInfo.agree) {
-            seterrorMsg('Please agree to code sharing')
+            seterrorMsg('Please agree to code of sharing')
             seterror(true);
         }
         else {
@@ -93,7 +93,7 @@ export default function Home() {
                         color="primary"
                         inputProps={{ 'aria-label': 'secondary checkbox' }}
                     />
-                    <a href="https://beckn.org/code-of-sharing/">I agree to the code of sharing</a>
+                    <a href="https://beckn.org/code-of-sharing/" target="_blank">I agree to the code of sharing</a>
                 </div>
                 <Button className="home-btn" variant="outlined" onClick={onButtonClick} >
                     proceed
