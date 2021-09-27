@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '@material-ui/core/Button';
-import { ListItem, Typography } from '@material-ui/core';
+import { CircularProgress, IconButton, ListItem, Typography } from '@material-ui/core';
 var find = require("lodash").find
 var filter = require("lodash").filter
 
@@ -54,6 +54,7 @@ const construct_tree = (response) => {
 export default function Combine() {
 
     const [selectedFiles, setFiles] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const uploadFile = (e) => {
         let file = e.target.files[0];
@@ -62,9 +63,15 @@ export default function Combine() {
         }
     }
 
+    const removeFile = (index) => {
+        selectedFiles.splice(index, 1)
+        setFiles([...selectedFiles])
+    }
+
 
     const downloadJson = async () => {
         if (selectedFiles.length > 0) {
+            setLoading(true)
             var data = 'participant_details \t' + order_by.join('\t')
             for (var file of selectedFiles) {
                 let t = await file.text()
@@ -77,6 +84,7 @@ export default function Combine() {
             link.href = data;
             console.log(`Exported`)
             link.click();
+            setLoading(false)
         }
     }
     return (
@@ -105,13 +113,19 @@ export default function Combine() {
                         <ListItem
                             divider
                             key={index}>
-                            <span>{file.name}</span>
+                            <span>{file.name}
+                            </span>
+                            <IconButton style={{ padding: 2 }} onClick={() => removeFile(index)} edge="end" aria-label="delete">
+                                {/* <svg color="black" height="20" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="CloseIcon"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg> */}
+                                <svg color="black" height="20" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="DeleteIcon"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"></path></svg>
+                            </IconButton>
                         </ListItem>
                     ))}
             </ul>
 
-            <Button variant="outlined" onClick={downloadJson}>Convert to Csv
-            </Button>
+            {loading ? <CircularProgress /> :
+                <Button variant="outlined" disabled={selectedFiles.length === 0} onClick={downloadJson}>Convert to Csv
+                </Button>}
         </div>
     )
 }
