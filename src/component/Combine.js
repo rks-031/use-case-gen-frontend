@@ -84,6 +84,7 @@ export default function Combine() {
             link.href = data;
             console.log(`Exported`)
             link.click();
+            setFiles([])
             setLoading(false)
         }
     }
