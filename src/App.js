@@ -32,6 +32,7 @@ import OnRating from './pages/OnRating';
 import Support from './pages/Support';
 import OnSupport from './pages/OnSupport';
 import Graph from './pages/Graph';
+import CombineCsv from './pages/CombineCsv';
 
 function App() {
   return (
@@ -102,6 +103,9 @@ function App() {
             </Route>
             <Route path="/search">
               <Search />
+            </Route>
+            <Route path="/combine">
+              <CombineCsv/>
             </Route>
             <Route path="/">
               <Home />
