@@ -31,8 +31,12 @@ export default function Header() {
         )}
         {state.userInfo.user && <button onClick={handleLogout}>Logout</button>}
         </div>*/}
-      <button className="ml-auto mx-2 rounded">Login</button>
-      <button className="rounded">Logout</button>
+      <button className="ml-auto mx-2 rounded">
+        <a href="/login">Login</a>
+      </button>
+      <button className="rounded">
+        <a href="/signup">SignUp</a>
+      </button>
     </div>
   );
 }

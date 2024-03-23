@@ -1,6 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
 const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     unique: [true, "Email already exists"],
@@ -16,6 +20,19 @@ const UserSchema = new Schema({
   },
   image: {
     type: String,
+  },
+  phoneNumber: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  organization_name: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: true,
   },
 });
 
