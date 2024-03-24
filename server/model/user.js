@@ -1,10 +1,7 @@
-import { Schema, model, models } from "mongoose";
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
 const UserSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
   email: {
     type: String,
     unique: [true, "Email already exists"],
@@ -21,21 +18,11 @@ const UserSchema = new Schema({
   image: {
     type: String,
   },
-  phoneNumber: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  organization_name: {
+  googleId: {
     type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    required: true,
+    unique: true, // Ensure uniqueness for Google IDs
   },
 });
 
-const User = models.User || model("User", UserSchema);
-console.log(User);
-export default User;
+const User = model("User", UserSchema);
+module.exports = User;

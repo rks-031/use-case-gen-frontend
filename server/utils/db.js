@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-let isConnected = false; //track the connection status
+// Load environment variables from .env file
+const dotenv = require("dotenv");
+dotenv.config();
+
+let isConnected = false;
 
 export const connectToDB = async () => {
   mongoose.set("strictQuery", true);
