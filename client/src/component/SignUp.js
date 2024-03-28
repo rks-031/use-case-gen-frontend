@@ -30,7 +30,11 @@ const SignUp = () => {
 
   return (
     <div className="container my-5">
-      <a href="http://localhost:5000/auth/google">Sign Up</a>
+      <button type="button" class="btn btn-info">
+        <a href="http://localhost:5000/auth/google" className="text-white">
+          Sign Up
+        </a>
+      </button>
     </div>
   );
 };
