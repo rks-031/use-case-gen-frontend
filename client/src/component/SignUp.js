@@ -9,7 +9,7 @@ const SignUp = () => {
     const profile = googleUser.getBasicProfile();
     const googleData = {
       email: profile.getEmail(),
-      username: profile.getEmail(), // You can modify this as needed
+      username: profile.getEmail(),
       image: profile.getImageUrl(),
       googleId: profile.getId(),
     };
@@ -37,7 +37,7 @@ const SignUp = () => {
     <div className="container my-5">
       <h2>Sign Up</h2>
       <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_ID} // Use REACT_APP_ prefix for React environment variables
+        clientId={process.env.REACT_APP_GOOGLE_ID}
         onSuccess={handleGoogleLoginSuccess}
         onFailure={handleGoogleLoginFailure}
         cookiePolicy={"single_host_origin"}
