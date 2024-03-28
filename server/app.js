@@ -2,12 +2,18 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("./passport");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const User = require("./model/user");
-
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Middleware
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
@@ -42,9 +48,12 @@ app.get(
 
 app.get(
   "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/" }),
+  passport.authenticate("google", {
+    failureRedirect: "http://localhost:3000/signup",
+    successRedirect: "http://localhost:3000/dashboard",
+  }),
   (req, res) => {
-    res.redirect("/dashboard");
+    res.send("Thank You for signing in!");
   }
 );
 

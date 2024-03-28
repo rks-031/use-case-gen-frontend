@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { GoogleLogin } from "react-google-login";
-
+import { REACT_APP_GOOGLE_ID } from "../env";
 const SignUp = () => {
   const [formData, setFormData] = useState({});
 
@@ -26,29 +26,11 @@ const SignUp = () => {
     console.error("Google login failed:", error);
   };
 
-  console.log(
-    "Google Client ID from backend:",
-    process.env.REACT_APP_GOOGLE_ID
-  );
+  console.log("Google Client ID from backend:", REACT_APP_GOOGLE_ID);
 
   return (
     <div className="container my-5">
-      <h2>Sign Up</h2>
-      <GoogleLogin
-        clientId={process.env.REACT_APP_GOOGLE_ID}
-        onSuccess={handleGoogleLoginSuccess}
-        onFailure={handleGoogleLoginFailure}
-        cookiePolicy={"single_host_origin"}
-        render={(renderProps) => (
-          <button
-            className="btn btn-primary"
-            onClick={renderProps.onClick}
-            disabled={renderProps.disabled}
-          >
-            Sign up with Google
-          </button>
-        )}
-      />
+      <a href="http://localhost:5000/auth/google">Sign Up</a>
     </div>
   );
 };
