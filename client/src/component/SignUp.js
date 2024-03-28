@@ -17,8 +17,6 @@ const SignUp = () => {
     try {
       const response = await axios.post("/api/signup", googleData);
       console.log(response.data);
-      // Optionally, you can redirect the user to a different page after signup
-      // window.location.href = "/redirect-page";
     } catch (error) {
       console.error("Error submitting Google signup form:", error);
     }

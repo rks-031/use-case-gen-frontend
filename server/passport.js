@@ -1,8 +1,6 @@
-// passport.js
-
 const passport = require("passport");
 const { Strategy: GoogleStrategy } = require("passport-google-oauth20");
-const User = require("./model/user"); // Assuming you have a User model
+const User = require("./model/user");
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -26,7 +24,6 @@ passport.use(
           googleId: profile.id,
           displayName: profile.displayName,
           email: profile.emails[0].value,
-          // Add other user data as needed
         });
 
         await newUser.save();

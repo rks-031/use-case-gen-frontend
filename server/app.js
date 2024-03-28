@@ -1,10 +1,8 @@
-// server.js
-
 const express = require("express");
 const session = require("express-session");
-const passport = require("./passport"); // Import your Passport configuration file
+const passport = require("./passport");
 const mongoose = require("mongoose");
-const User = require("./model/user"); // Import your User model
+const User = require("./model/user");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
