@@ -27,7 +27,7 @@ import Support from "./pages/Support";
 import OnSupport from "./pages/OnSupport";
 import Graph from "./pages/Graph";
 import CombineCsv from "./pages/CombineCsv";
-import Login from "./component/Login";
+import Logout from "./component/Logout";
 import SignUp from "./component/SignUp";
 
 function App() {
@@ -103,10 +103,10 @@ function App() {
             <Route path="/combine">
               <CombineCsv />
             </Route>
-            <Route path="/login">
-              <Login />
+            <Route path="/logout">
+              <Logout />
             </Route>
-            <Route path="/signup">
+            <Route path="/signin">
               <SignUp />
             </Route>
             <Route path="/">
