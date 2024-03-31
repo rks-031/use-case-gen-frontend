@@ -6,9 +6,11 @@ import axios from "axios";
 const Header = () => {
   const [state, setState] = useContext(Context);
   const [userData, setUserData] = useState({}); // State to store user data
+  const [loggedIn, setLoggedIn] = useState(false); // State to track login status
 
   const handleLogout = () => {
     setState({ userInfo: {} });
+    setLoggedIn(false); // Update login status on logout
   };
 
   useEffect(() => {
@@ -22,6 +24,7 @@ const Header = () => {
         })
         .then((response) => {
           setUserData(response.data);
+          setLoggedIn(true); // Update login status on successful authentication
         })
         .catch((error) => {
           console.error("Error fetching user data:", error);
@@ -38,46 +41,42 @@ const Header = () => {
       </a>
       <div className="collapse navbar-collapse" id="navbarNav">
         <ul className="navbar-nav ml-auto">
-          {state.userInfo.googleId ? (
-            <li className="nav-item">
-              <img
-                className="profile-icon rounded-circle"
-                src={state.userInfo.image}
-                alt="Profile Icon"
-                style={{ width: "32px", height: "32px" }} // Custom CSS for smaller size
-              />
-            </li>
+          {loggedIn ? (
+            <React.Fragment>
+              <li className="nav-item">
+                <button className="btn btn-secondary" onClick={handleLogout}>
+                  Logout
+                </button>
+              </li>
+              <li className="nav-item">
+                <img
+                  className="profile-icon rounded-circle mx-2"
+                  src={userData.profileImage}
+                  alt={userData.username}
+                  style={{ width: "35px", height: "35px" }} // Custom CSS for smaller size
+                />
+              </li>
+            </React.Fragment>
           ) : (
             <li className="nav-item">
-              <button className="btn  btn-secondary mr-2">
-                <a
-                  href="http://localhost:5000/logout"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  Logout
-                </a>
-              </button>
-              <button className="btn  btn-secondary">
-                <a
-                  href="http://localhost:5000/auth/google"
-                  style={{ color: "white", textDecoration: "none" }}
-                >
-                  Sign in
-                </a>
-              </button>
-              <img
-                className="profile-icon rounded-circle ml-2"
-                src={userData.profileImage}
-                alt={userData.username}
-                style={{ width: "32px", height: "32px" }} // Custom CSS for smaller size
-              />
-            </li>
-          )}
-          {state.userInfo.googleId && (
-            <li className="nav-item">
-              <button className="btn btn-secondary" onClick={handleLogout}>
-                Logout
-              </button>
+              <React.Fragment>
+                <button className="btn  btn-secondary mr-2">
+                  <a
+                    href="http://localhost:5000/logout"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Logout
+                  </a>
+                </button>
+                <button className="btn  btn-secondary">
+                  <a
+                    href="http://localhost:5000/auth/google"
+                    style={{ color: "white", textDecoration: "none" }}
+                  >
+                    Login
+                  </a>
+                </button>
+              </React.Fragment>
             </li>
           )}
         </ul>
